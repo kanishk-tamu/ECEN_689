@@ -1,0 +1,8 @@
+{
+  "compile_log": "/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-h7mgfngg/tb.sv:264: syntax error\n/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-h7mgfngg/tb.sv:264: error: Malformed statement",
+  "compiled": false,
+  "counts_valid": false,
+  "output": "",
+  "process_ok": false,
+  "success": false
+}

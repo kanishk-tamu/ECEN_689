@@ -1,0 +1,149 @@
+{
+  "benchmark_scope": "instructor A1 samples; not VerilogEval or hidden tests",
+  "finished_at": 1788922009.170036,
+  "llm_calls": 2,
+  "max_llm_calls": 7,
+  "max_output_tokens": 8192,
+  "module": "alu",
+  "protected_files_unchanged": true,
+  "protected_sha256": {
+    "module_packages/alu/scripts/run_alu.sh": "53f4b8f34799b430db050508398dc015086c2355fda8f0e41ce6ca6b656daf09",
+    "module_packages/alu/student_template/alu.sv": "5af99c89affff642334f7aaf214116fe3ce6d17543e3675925965db2caac0548",
+    "module_packages/alu/testbench/alu_tb.sv": "08f686070ac77444f3add1aedd363e78046e9a9d0dfc9495fb54067239247cd1",
+    "module_packages/alu/vectors/sample/alu_sample.txt": "c4fb26647c532a444dbaf56c2055b61366b963cfa5db8d8c067a2d2788c72c8f",
+    "module_packages/alu/vectors/sample/alu_sample_cases.md": "fd8cb3885336b5ba5fa59ff02d1d21b5d88b42ee8607b73edb982811396f9577",
+    "module_packages/controller/scripts/run_controller.sh": "f578ff38b5eda61ec54874dda1f2eeccbd696930ac20446891742b610dfaf72f",
+    "module_packages/controller/student_template/controller.sv": "f023e99149e9adef9ca6b5d14b9dd05463c990e632d6aa080399d11358a4a9bf",
+    "module_packages/controller/testbench/controller_tb.sv": "6483272bdedb33bfb4ea7405640992a85c3a82ff900ff603bd16ecff0f6dc691",
+    "module_packages/controller/vectors/sample/controller_sample.txt": "8ae72f72a420ff34f7b8ff67aeb84a43032075aa8085072b3ce505a13b3bc1e7",
+    "module_packages/controller/vectors/sample/controller_sample_cases.md": "976201fc606229d82d2341e84dd9de5466de89752d752146157e54a73bb77527",
+    "module_packages/extend/scripts/run_extend.sh": "7d3e1e8aa97fe6de786e3912263bd31722289335b9228514a6f04f1b3ea6fd6c",
+    "module_packages/extend/student_template/extend.sv": "5ace5e18a0b08d1492328229c35a916aff49fcea4056859dc8da662f294800de",
+    "module_packages/extend/testbench/extend_tb.sv": "b584f44d0b9f634d6f6066b42751bc502d69c13937592f3901347d8c3ca8c2b4",
+    "module_packages/extend/vectors/sample/extend_sample.txt": "4160ff923a010684623cc8c754ded7c8d01c6b1efa18c1034d705cf9aedb1db4",
+    "module_packages/extend/vectors/sample/extend_sample_cases.md": "39dcd79ee4d70ee93dfe75952cd5cfb02254ec0731bb92c2f69a2f266d376930",
+    "module_packages/regfile/scripts/run_regfile.sh": "7a6b6efa81d8f4832747bbc9aaa17e1ed46b93a78281b51cce6b477d1d426402",
+    "module_packages/regfile/student_template/regfile.sv": "1f58f38538c75bec6eef90e74fa5a55eba548ec64f2a5c940158bfcc8f2d1fc9",
+    "module_packages/regfile/testbench/regfile_tb.sv": "9c935ebffb04260b47939e9fbe714a318cfde4fde4dc20b6ca1bbcb3b3d73510",
+    "module_packages/regfile/vectors/sample/regfile_sample.txt": "474520a123d6343980c2d69b984f8b2a4b73cdd049115e6024d4fcc74f96a3bd",
+    "module_packages/regfile/vectors/sample/regfile_sample_cases.md": "8029ff937c211c680de5135fdeca2b249f5f8795ea4c6e2aa13a2d3311e73d57",
+    "specs/alu.yaml": "7b454284118aec242e0b2109b1dbd382f40604fe5dae8470f250983357b28185",
+    "specs/controller.yaml": "1cda506f968fbd5ecc48877b82a4cfeb42a01bc010a2e219ff33ae40dadc8999",
+    "specs/extend.yaml": "37736ec400da8074daafe9f86d86456320a55df942749cbbdb0dddfad5938649",
+    "specs/regfile.yaml": "8427a3daccfdc083b686b28e52baac8f62f3967cbfa801195866b7d6a0502173",
+    "student_code/io_utils.py": "242d232edc4a04d35a0ca9e08f89eded3b1c602ba90456b6bef9530c6dae0e36",
+    "student_code/llm_clients.py": "27b7b95fc2bee54ee7a9d8056000549e36dda4917790226a0369f5d31b275222",
+    "student_code/tool_runner.py": "849bcdb98c34083ae32dcd419acf2c68dffb4d2e0394d14a5ee31f9d7e20a59c"
+  },
+  "provider": "tamu",
+  "requested_model": "gpt-5.4",
+  "returned_model": "gpt-5.4-2026-03-05",
+  "rtl_attempts": [
+    {
+      "attempt": 0,
+      "guardrail": null,
+      "path": "rtl_00.sv",
+      "sample": {
+        "compile_log": "",
+        "compiled": true,
+        "counts_valid": true,
+        "expected_total": 40,
+        "failed": 0,
+        "output": "DUT:     /var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-_xegsz2g/rtl.sv\nVectors: /Users/kanishk/Documents/MSEC/TAMU/Fall26/LLMs for AGNTC HW DSGN/A1/A1_assignment_only/module_packages/alu/vectors/sample/alu_sample.txt\n============================================================\nAssignment 1 RV32I ALU Testbench\nVectors: /Users/kanishk/Documents/MSEC/TAMU/Fall26/LLMs for AGNTC HW DSGN/A1/A1_assignment_only/module_packages/alu/vectors/sample/alu_sample.txt\n============================================================\n------------------------------------------------------------\nPassed: 40\nFailed: 0\nTotal : 40\nScore : 100.00%\n------------------------------------------------------------\nPASS\n>>> RESULT: PASS\n",
+        "passed": 40,
+        "process_ok": true,
+        "success": true,
+        "total": 40
+      },
+      "seconds": 7.978,
+      "sha256": "6e7e27fb837b5f6fffa692799901b6e6bfba4bc37ab6f2c39ba623e542b26119",
+      "usage": {
+        "completion_tokens": 836,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        },
+        "latency_checkpoint": {
+          "engine_tbt_ms": 8,
+          "engine_ttft_ms": 101,
+          "engine_ttlt_ms": 6543,
+          "pre_inference_ms": 167,
+          "service_tbt_ms": 8,
+          "service_ttft_ms": 507,
+          "service_ttlt_ms": 6942,
+          "user_visible_ttft_ms": 340
+        },
+        "prompt_tokens": 1346,
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cached_tokens": 0
+        },
+        "total_tokens": 2182
+      }
+    }
+  ],
+  "rtl_retries": 3,
+  "rtl_verified": true,
+  "sampling": "provider defaults; not overridden",
+  "schema": 1,
+  "selected_rtl": "rtl_00.sv",
+  "selection_reason": "Highest instructor tests passed; ties prefer a full pass, successful compile and earlier attempt.",
+  "source_sha256": {
+    "student_code/io_utils.py": "242d232edc4a04d35a0ca9e08f89eded3b1c602ba90456b6bef9530c6dae0e36",
+    "student_code/lab1.py": "0645052e5f9338f51c137c37ae2caaf12f21ed1dd8f305c98ba157d4df27de43",
+    "student_code/llm_clients.py": "27b7b95fc2bee54ee7a9d8056000549e36dda4917790226a0369f5d31b275222",
+    "student_code/tool_runner.py": "849bcdb98c34083ae32dcd419acf2c68dffb4d2e0394d14a5ee31f9d7e20a59c"
+  },
+  "started_at": 1788922000.792516,
+  "status": "passed",
+  "style": "template",
+  "tb_attempts": [
+    {
+      "attempt": 0,
+      "guardrail": null,
+      "path": "tb_00.sv",
+      "seconds": 0.269,
+      "self_check": {
+        "compile_log": "",
+        "compiled": true,
+        "counts_valid": true,
+        "failed": 0,
+        "output": "A1_CHECKS passed=4824 failed=0 total=4824\nPASS\n/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-o8jrbz3u/tb.sv:344: $finish called at 2608000 (1ps)",
+        "passed": 4824,
+        "process_ok": true,
+        "success": true,
+        "total": 4824
+      },
+      "sha256": "b05efbba5e979705e0d00ca190af303022c239920380da762549d1a6ca0f4b2b",
+      "usage": {
+        "completion_tokens": 4756,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        },
+        "latency_checkpoint": {
+          "engine_tbt_ms": 8,
+          "engine_ttft_ms": 89,
+          "engine_ttlt_ms": 37515,
+          "pre_inference_ms": 126,
+          "service_tbt_ms": 8,
+          "service_ttft_ms": 448,
+          "service_ttlt_ms": 37868,
+          "user_visible_ttft_ms": 322
+        },
+        "prompt_tokens": 1873,
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cached_tokens": 1664
+        },
+        "total_tokens": 6629
+      }
+    }
+  ],
+  "tb_retries": 2,
+  "tb_verified": true
+}

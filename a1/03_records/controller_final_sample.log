@@ -1,0 +1,17 @@
+DUT:     results/controller/final_rtl.sv
+Vectors: /Users/kanishk/Documents/MSEC/TAMU/Fall26/LLMs for AGNTC HW DSGN/A1/A1_assignment_only/module_packages/controller/vectors/sample/controller_sample.txt
+============================================================
+Assignment 1 RV32I Controller Testbench
+Vectors: /Users/kanishk/Documents/MSEC/TAMU/Fall26/LLMs for AGNTC HW DSGN/A1/A1_assignment_only/module_packages/controller/vectors/sample/controller_sample.txt
+============================================================
+------------------------------------------------------------
+Passed: 40
+Failed: 0
+Total : 40
+Score : 100.00%
+------------------------------------------------------------
+PASS
+>>> RESULT: PASS
+results/controller/final_rtl.sv:22: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'InstrD[31:0]').
+results/controller/final_rtl.sv:23: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'InstrD[31:0]').
+results/controller/final_rtl.sv:24: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'InstrD[31:0]').

@@ -1,0 +1,14 @@
+DUT:     /var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-sxomyxjp/rtl.sv
+Vectors: /Users/kanishk/Documents/MSEC/TAMU/Fall26/LLMs for AGNTC HW DSGN/A1/A1_assignment_only/module_packages/controller/vectors/sample/controller_sample.txt
+============================================================
+Assignment 1 RV32I Controller Testbench
+Vectors: /Users/kanishk/Documents/MSEC/TAMU/Fall26/LLMs for AGNTC HW DSGN/A1/A1_assignment_only/module_packages/controller/vectors/sample/controller_sample.txt
+============================================================
+------------------------------------------------------------
+Passed: 40
+Failed: 0
+Total : 40
+Score : 100.00%
+------------------------------------------------------------
+PASS
+>>> RESULT: PASS

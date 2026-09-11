@@ -1,0 +1,11 @@
+{
+  "compile_log": "",
+  "compiled": true,
+  "counts_valid": true,
+  "failed": 0,
+  "output": "A1_CHECKS passed=504 failed=0 total=504\nPASS\n/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-0a_173de/tb.sv:304: $finish called at 46400 (1ps)",
+  "passed": 504,
+  "process_ok": true,
+  "success": true,
+  "total": 504
+}

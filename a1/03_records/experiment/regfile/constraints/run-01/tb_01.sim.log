@@ -1,0 +1,11 @@
+FAIL label=reset_high_at_posedge_no_effect.rd1 clk=1 reset=1 we3=1 a1=1 a2=31 a3=7 wd3=0x12345678 actual=0xxxxxxxxx expected=0x00000000
+FAIL label=reset_high_at_posedge_no_effect.rd2 clk=1 reset=1 we3=1 a1=1 a2=31 a3=7 wd3=0x12345678 actual=0xxxxxxxxx expected=0x00000000
+FAIL label=sample_read_x5_deadbeef.rd1 clk=0 reset=0 we3=1 a1=5 a2=0 a3=5 wd3=0xdeadbeef actual=0x00000000 expected=0xdeadbeef
+FAIL label=sample_write_x0_ignored.rd1 clk=0 reset=0 we3=1 a1=5 a2=0 a3=0 wd3=0xffffffff actual=0x00000000 expected=0xdeadbeef
+FAIL label=sample_read_x0_zero_x5_unchanged.rd2 clk=0 reset=0 we3=1 a1=0 a2=5 a3=0 wd3=0xffffffff actual=0x00000000 expected=0xdeadbeef
+FAIL label=sample_we0_no_change.rd2 clk=0 reset=0 we3=0 a1=0 a2=5 a3=5 wd3=0x0000002a actual=0x00000000 expected=0xdeadbeef
+FAIL label=sample_x5_still_deadbeef.rd1 clk=0 reset=0 we3=0 a1=5 a2=5 a3=5 wd3=0x0000002a actual=0x00000000 expected=0xdeadbeef
+FAIL label=sample_x5_still_deadbeef.rd2 clk=0 reset=0 we3=0 a1=5 a2=5 a3=5 wd3=0x0000002a actual=0x00000000 expected=0xdeadbeef
+A1_CHECKS passed=426 failed=16 total=442
+FAIL
+/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-z7pp_t9p/tb.sv:321: $finish called at 49500 (1ps)

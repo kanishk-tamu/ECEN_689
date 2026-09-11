@@ -1,0 +1,6 @@
+{
+  "run": "alu/constraints/run-01",
+  "rtl_attempt": "rtl_00.sv",
+  "sha256": "97eb80ea30a8e33ae23bc1ae327a8eb7cac6845603ed5d8a3e34b4eb18acb858",
+  "reason": "Highest sample score; ties prefer a verified TB, then earlier RTL attempt; stable path order resolves remaining ties."
+}

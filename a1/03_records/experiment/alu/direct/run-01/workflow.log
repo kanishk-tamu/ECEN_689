@@ -1,0 +1,6 @@
+Using spec: specs/alu.yaml
+Top module: alu
+Model: gpt-5.4
+Suggested output directory: /Users/kanishk/Documents/MSEC/TAMU/Fall26/LLMs for AGNTC HW DSGN/A1/A1_assignment_only/results/experiment/alu/direct/run-01
+Initial RTL: 40/40 samples
+alu: passed; artifacts: /Users/kanishk/Documents/MSEC/TAMU/Fall26/LLMs for AGNTC HW DSGN/A1/A1_assignment_only/results/experiment/alu/direct/run-01

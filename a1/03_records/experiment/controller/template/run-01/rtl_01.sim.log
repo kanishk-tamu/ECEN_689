@@ -1,0 +1,54 @@
+DUT:     /var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-wa3ikz8n/rtl.sv
+Vectors: /Users/kanishk/Documents/MSEC/TAMU/Fall26/LLMs for AGNTC HW DSGN/A1/A1_assignment_only/module_packages/controller/vectors/sample/controller_sample.txt
+============================================================
+Assignment 1 RV32I Controller Testbench
+Vectors: /Users/kanishk/Documents/MSEC/TAMU/Fall26/LLMs for AGNTC HW DSGN/A1/A1_assignment_only/module_packages/controller/vectors/sample/controller_sample.txt
+============================================================
+FAIL test=38 category=7 Instr=00312463
+  RegWriteD     got=0 exp=0
+  ImmSrcD       got=010 exp=00000000000000000000000000000000
+  ALUSrcAD      got=1 exp=0
+  ALUSrcBD      got=1 exp=0
+  MemRWD        got=00 exp=00000000000000000000000000000000
+  ResultSrcD    got=000 exp=00000000000000000000000000000000
+  BranchD       got=0 exp=0
+  JumpD         got=0 exp=0
+  ALUResultSrcD got=0 exp=0
+  ALUSelectD    got=000 exp=00000000000000000000000000000000
+  SubArithD     got=0 exp=0
+  IllegalInstrD got=1 exp=1
+FAIL test=39 category=7 Instr=000110e7
+  RegWriteD     got=0 exp=0
+  ImmSrcD       got=000 exp=00000000000000000000000000000000
+  ALUSrcAD      got=0 exp=0
+  ALUSrcBD      got=1 exp=0
+  MemRWD        got=00 exp=00000000000000000000000000000000
+  ResultSrcD    got=000 exp=00000000000000000000000000000000
+  BranchD       got=0 exp=0
+  JumpD         got=0 exp=0
+  ALUResultSrcD got=1 exp=0
+  ALUSelectD    got=000 exp=00000000000000000000000000000000
+  SubArithD     got=0 exp=0
+  IllegalInstrD got=1 exp=1
+FAIL test=40 category=7 Instr=403170b3
+  RegWriteD     got=0 exp=0
+  ImmSrcD       got=000 exp=00000000000000000000000000000000
+  ALUSrcAD      got=0 exp=0
+  ALUSrcBD      got=0 exp=0
+  MemRWD        got=00 exp=00000000000000000000000000000000
+  ResultSrcD    got=000 exp=00000000000000000000000000000000
+  BranchD       got=0 exp=0
+  JumpD         got=0 exp=0
+  ALUResultSrcD got=0 exp=0
+  ALUSelectD    got=111 exp=00000000000000000000000000000000
+  SubArithD     got=0 exp=0
+  IllegalInstrD got=1 exp=1
+------------------------------------------------------------
+Passed: 37
+Failed: 3
+Total : 40
+Score : 92.50%
+------------------------------------------------------------
+FAIL
+/Users/kanishk/Documents/MSEC/TAMU/Fall26/LLMs for AGNTC HW DSGN/A1/A1_assignment_only/module_packages/controller/testbench/controller_tb.sv:156: $finish(1) called at 40000 (1ps)
+>>> RESULT: FAIL

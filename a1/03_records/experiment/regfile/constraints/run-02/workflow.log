@@ -1,0 +1,6 @@
+Using spec: specs/regfile.yaml
+Top module: regfile
+Model: gpt-5.4
+Suggested output directory: /Users/kanishk/Documents/MSEC/TAMU/Fall26/LLMs for AGNTC HW DSGN/A1/A1_assignment_only/results/experiment/regfile/constraints/run-02
+Initial RTL: 39/39 samples
+regfile: passed; artifacts: /Users/kanishk/Documents/MSEC/TAMU/Fall26/LLMs for AGNTC HW DSGN/A1/A1_assignment_only/results/experiment/regfile/constraints/run-02

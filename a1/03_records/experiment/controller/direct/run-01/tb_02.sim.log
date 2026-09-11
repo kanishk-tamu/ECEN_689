@@ -1,0 +1,3 @@
+A1_CHECKS passed=1825 failed=0 total=1825
+PASS
+/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-9zr4jgfa/tb.sv:603: $finish called at 169000 (1ps)

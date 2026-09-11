@@ -1,0 +1,11 @@
+{
+  "compile_log": "",
+  "compiled": true,
+  "counts_valid": true,
+  "failed": 4,
+  "output": "FAIL label=rite_test_after_posedge_only_rd1 a1=9 a2=9 a3=9 we3=1 reset=0 wd3=0xcafebabe actual=0xcafebabe expected=0x00000000\nFAIL label=rite_test_after_posedge_only_rd2 a1=9 a2=9 a3=9 we3=1 reset=0 wd3=0xcafebabe actual=0xcafebabe expected=0x00000000\nFAIL label=edge_write_still_not_written_rd1 a1=9 a2=9 a3=9 we3=0 reset=0 wd3=0x00000000 actual=0xcafebabe expected=0x00000000\nFAIL label=edge_write_still_not_written_rd2 a1=9 a2=9 a3=9 we3=0 reset=0 wd3=0x00000000 actual=0xcafebabe expected=0x00000000\nA1_CHECKS passed=516 failed=4 total=520\nFAIL\n/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-77xhengb/tb.sv:344: $finish called at 51450 (1ps)",
+  "passed": 516,
+  "process_ok": true,
+  "success": false,
+  "total": 520
+}

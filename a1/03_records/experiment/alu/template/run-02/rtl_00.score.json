@@ -1,0 +1,12 @@
+{
+  "compile_log": "/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-83t5b7ig/rtl.sv:19: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'B[31:0]').",
+  "compiled": true,
+  "counts_valid": true,
+  "expected_total": 40,
+  "failed": 0,
+  "output": "DUT:     /var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-83t5b7ig/rtl.sv\nVectors: /Users/kanishk/Documents/MSEC/TAMU/Fall26/LLMs for AGNTC HW DSGN/A1/A1_assignment_only/module_packages/alu/vectors/sample/alu_sample.txt\n============================================================\nAssignment 1 RV32I ALU Testbench\nVectors: /Users/kanishk/Documents/MSEC/TAMU/Fall26/LLMs for AGNTC HW DSGN/A1/A1_assignment_only/module_packages/alu/vectors/sample/alu_sample.txt\n============================================================\n------------------------------------------------------------\nPassed: 40\nFailed: 0\nTotal : 40\nScore : 100.00%\n------------------------------------------------------------\nPASS\n>>> RESULT: PASS\n/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-83t5b7ig/rtl.sv:19: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'B[31:0]').\n",
+  "passed": 40,
+  "process_ok": true,
+  "success": true,
+  "total": 40
+}

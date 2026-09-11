@@ -1,0 +1,6 @@
+{
+  "run": "controller/constraints/run-01",
+  "rtl_attempt": "rtl_00.sv",
+  "sha256": "1c2f6d0316c9a2e746756f12147d2bc5fc0e53f6429237fab7b84be034bb40ee",
+  "reason": "Highest sample score; ties prefer a verified TB, then earlier RTL attempt; stable path order resolves remaining ties."
+}

@@ -1,0 +1,88 @@
+{
+  "content": "```systemverilog\nmodule alu (\n    input  logic [31:0] A,\n    input  logic [31:0] B,\n    input  logic [2:0]  ALUSelect,\n    input  logic        SubArith,\n    output logic [31:0] ALUResult,\n    output logic [31:0] Sum\n);\n\n    logic [4:0]  shamt;\n    logic [31:0] add_result;\n    logic [31:0] sub_result;\n    logic [31:0] sll_result;\n    logic [31:0] srl_result;\n    logic [31:0] sra_result;\n    logic [31:0] xor_result;\n    logic [31:0] or_result;\n    logic [31:0] and_result;\n    logic [31:0] slt_result;\n    logic [31:0] sltu_result;\n\n    assign shamt       = B[4:0];\n    assign add_result  = A + B;\n    assign sub_result  = A - B;\n    assign sll_result  = A << shamt;\n    assign srl_result  = A >> shamt;\n    assign sra_result  = $signed(A) >>> shamt;\n    assign xor_result  = A ^ B;\n    assign or_result   = A | B;\n    assign and_result  = A & B;\n    assign slt_result  = ($signed(A) < $signed(B)) ? 32'h00000001 : 32'h00000000;\n    assign sltu_result = (A < B) ? 32'h00000001 : 32'h00000000;\n\n    always_comb begin\n        Sum = 32'h00000000;\n        if (SubArith) begin\n            Sum = sub_result;\n        end else begin\n            Sum = add_result;\n        end\n    end\n\n    always_comb begin\n        ALUResult = 32'h00000000;\n\n        case (ALUSelect)\n            3'b000: begin\n                if (SubArith) begin\n                    ALUResult = sub_result;\n                end else begin\n                    ALUResult = add_result;\n                end\n            end\n\n            3'b001: begin\n                if (!SubArith) begin\n                    ALUResult = sll_result;\n                end else begin\n                    ALUResult = 32'h00000000;\n                end\n            end\n\n            3'b010: begin\n                if (SubArith) begin\n                    ALUResult = slt_result;\n                end else begin\n                    ALUResult = 32'h00000000;\n                end\n            end\n\n            3'b011: begin\n                if (SubArith) begin\n                    ALUResult = sltu_result;\n                end else begin\n                    ALUResult = 32'h00000000;\n                end\n            end\n\n            3'b100: begin\n                if (!SubArith) begin\n                    ALUResult = xor_result;\n                end else begin\n                    ALUResult = 32'h00000000;\n                end\n            end\n\n            3'b101: begin\n                if (SubArith) begin\n                    ALUResult = sra_result;\n                end else begin\n                    ALUResult = srl_result;\n                end\n            end\n\n            3'b110: begin\n                if (!SubArith) begin\n                    ALUResult = or_result;\n                end else begin\n                    ALUResult = 32'h00000000;\n                end\n            end\n\n            3'b111: begin\n                if (!SubArith) begin\n                    ALUResult = and_result;\n                end else begin\n                    ALUResult = 32'h00000000;\n                end\n            end\n\n            default: begin\n                ALUResult = 32'h00000000;\n            end\n        endcase\n    end\n\nendmodule\n```",
+  "model": "gpt-5.4-2026-03-05",
+  "provider": "tamu",
+  "raw": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "annotations": [],
+          "content": "```systemverilog\nmodule alu (\n    input  logic [31:0] A,\n    input  logic [31:0] B,\n    input  logic [2:0]  ALUSelect,\n    input  logic        SubArith,\n    output logic [31:0] ALUResult,\n    output logic [31:0] Sum\n);\n\n    logic [4:0]  shamt;\n    logic [31:0] add_result;\n    logic [31:0] sub_result;\n    logic [31:0] sll_result;\n    logic [31:0] srl_result;\n    logic [31:0] sra_result;\n    logic [31:0] xor_result;\n    logic [31:0] or_result;\n    logic [31:0] and_result;\n    logic [31:0] slt_result;\n    logic [31:0] sltu_result;\n\n    assign shamt       = B[4:0];\n    assign add_result  = A + B;\n    assign sub_result  = A - B;\n    assign sll_result  = A << shamt;\n    assign srl_result  = A >> shamt;\n    assign sra_result  = $signed(A) >>> shamt;\n    assign xor_result  = A ^ B;\n    assign or_result   = A | B;\n    assign and_result  = A & B;\n    assign slt_result  = ($signed(A) < $signed(B)) ? 32'h00000001 : 32'h00000000;\n    assign sltu_result = (A < B) ? 32'h00000001 : 32'h00000000;\n\n    always_comb begin\n        Sum = 32'h00000000;\n        if (SubArith) begin\n            Sum = sub_result;\n        end else begin\n            Sum = add_result;\n        end\n    end\n\n    always_comb begin\n        ALUResult = 32'h00000000;\n\n        case (ALUSelect)\n            3'b000: begin\n                if (SubArith) begin\n                    ALUResult = sub_result;\n                end else begin\n                    ALUResult = add_result;\n                end\n            end\n\n            3'b001: begin\n                if (!SubArith) begin\n                    ALUResult = sll_result;\n                end else begin\n                    ALUResult = 32'h00000000;\n                end\n            end\n\n            3'b010: begin\n                if (SubArith) begin\n                    ALUResult = slt_result;\n                end else begin\n                    ALUResult = 32'h00000000;\n                end\n            end\n\n            3'b011: begin\n                if (SubArith) begin\n                    ALUResult = sltu_result;\n                end else begin\n                    ALUResult = 32'h00000000;\n                end\n            end\n\n            3'b100: begin\n                if (!SubArith) begin\n                    ALUResult = xor_result;\n                end else begin\n                    ALUResult = 32'h00000000;\n                end\n            end\n\n            3'b101: begin\n                if (SubArith) begin\n                    ALUResult = sra_result;\n                end else begin\n                    ALUResult = srl_result;\n                end\n            end\n\n            3'b110: begin\n                if (!SubArith) begin\n                    ALUResult = or_result;\n                end else begin\n                    ALUResult = 32'h00000000;\n                end\n            end\n\n            3'b111: begin\n                if (!SubArith) begin\n                    ALUResult = and_result;\n                end else begin\n                    ALUResult = 32'h00000000;\n                end\n            end\n\n            default: begin\n                ALUResult = 32'h00000000;\n            end\n        endcase\n    end\n\nendmodule\n```",
+          "role": "assistant"
+        },
+        "provider_specific_fields": {
+          "content_filter_results": {}
+        }
+      }
+    ],
+    "created": 1788922001,
+    "id": "chatcmpl-EM2cbTPN4opwfmWBJUcIfEeKv2rB7",
+    "model": "gpt-5.4-2026-03-05",
+    "object": "chat.completion",
+    "prompt_filter_results": [
+      {
+        "content_filter_results": {},
+        "prompt_index": 0
+      }
+    ],
+    "routing": {
+      "serving_pipereplica": "d20260817145135-d9f505e1-default-r0-dp0-default"
+    },
+    "service_tier": "default",
+    "usage": {
+      "completion_tokens": 836,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": 0
+      },
+      "latency_checkpoint": {
+        "engine_tbt_ms": 8,
+        "engine_ttft_ms": 101,
+        "engine_ttlt_ms": 6543,
+        "pre_inference_ms": 167,
+        "service_tbt_ms": 8,
+        "service_ttft_ms": 507,
+        "service_ttlt_ms": 6942,
+        "user_visible_ttft_ms": 340
+      },
+      "prompt_tokens": 1346,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      },
+      "total_tokens": 2182
+    }
+  },
+  "settings": {
+    "max_output_tokens": 8192
+  },
+  "usage": {
+    "completion_tokens": 836,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": 0
+    },
+    "latency_checkpoint": {
+      "engine_tbt_ms": 8,
+      "engine_ttft_ms": 101,
+      "engine_ttlt_ms": 6543,
+      "pre_inference_ms": 167,
+      "service_tbt_ms": 8,
+      "service_ttft_ms": 507,
+      "service_ttlt_ms": 6942,
+      "user_visible_ttft_ms": 340
+    },
+    "prompt_tokens": 1346,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cached_tokens": 0
+    },
+    "total_tokens": 2182
+  }
+}

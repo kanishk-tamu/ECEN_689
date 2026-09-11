@@ -1,0 +1,9 @@
+RTL:       results/controller/final_rtl.sv
+Testbench: results/controller/controller_tb.sv
+A1_CHECKS passed=734 failed=0 total=734
+PASS
+results/controller/controller_tb.sv:399: $finish called at 81000 (1ps)
+>>> RESULT: PASS
+results/controller/final_rtl.sv:22: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'InstrD[31:0]').
+results/controller/final_rtl.sv:23: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'InstrD[31:0]').
+results/controller/final_rtl.sv:24: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'InstrD[31:0]').

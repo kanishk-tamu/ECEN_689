@@ -1,0 +1,20 @@
+RTL:       results/extend/final_rtl.sv
+Testbench: results/extend/extend_tb.sv
+A1_CHECKS passed=134 failed=0 total=134
+PASS
+results/extend/extend_tb.sv:223: $finish called at 135000 (1ps)
+>>> RESULT: PASS
+results/extend/final_rtl.sv:11: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'InstrD[31:7]').
+results/extend/final_rtl.sv:11: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'InstrD[31:7]').
+results/extend/final_rtl.sv:12: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'InstrD[31:7]').
+results/extend/final_rtl.sv:12: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'InstrD[31:7]').
+results/extend/final_rtl.sv:12: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'InstrD[31:7]').
+results/extend/final_rtl.sv:13: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'InstrD[31:7]').
+results/extend/final_rtl.sv:13: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'InstrD[31:7]').
+results/extend/final_rtl.sv:13: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'InstrD[31:7]').
+results/extend/final_rtl.sv:13: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'InstrD[31:7]').
+results/extend/final_rtl.sv:14: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'InstrD[31:7]').
+results/extend/final_rtl.sv:14: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'InstrD[31:7]').
+results/extend/final_rtl.sv:14: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'InstrD[31:7]').
+results/extend/final_rtl.sv:14: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'InstrD[31:7]').
+results/extend/final_rtl.sv:15: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'InstrD[31:7]').

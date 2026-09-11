@@ -1,0 +1,8 @@
+{
+  "compile_log": "",
+  "compiled": false,
+  "counts_valid": false,
+  "guardrail": "Only the timescale directive is permitted; no macros or includes.",
+  "output": "",
+  "success": false
+}

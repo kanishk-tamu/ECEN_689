@@ -1,0 +1,5 @@
+/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-z_vs83oa/rtl.sv:22: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'InstrD[31:0]').
+/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-z_vs83oa/rtl.sv:23: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'InstrD[31:0]').
+/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-z_vs83oa/rtl.sv:24: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'InstrD[31:0]').
+/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-z_vs83oa/tb.sv:338: error: Missing argument 2 of call to task.
+1 error(s) during elaboration.

@@ -1,0 +1,86 @@
+{
+  "content": "```systemverilog\nmodule extend (\n    input  logic [31:7] InstrD,\n    input  logic [2:0]  ImmSrcD,\n    output logic [31:0] ImmExtD\n);\n\n    always_comb begin\n        case (ImmSrcD)\n            3'b000: ImmExtD = {{20{InstrD[31]}}, InstrD[31:20]};                            // I-type\n            3'b001: ImmExtD = {{20{InstrD[31]}}, InstrD[31:25], InstrD[11:7]};              // S-type\n            3'b010: ImmExtD = {{20{InstrD[31]}}, InstrD[7], InstrD[30:25], InstrD[11:8], 1'b0}; // B-type\n            3'b011: ImmExtD = {{12{InstrD[31]}}, InstrD[19:12], InstrD[20], InstrD[30:21], 1'b0}; // J-type\n            3'b100: ImmExtD = {InstrD[31:12], 12'b0};                                        // U-type\n            default: ImmExtD = 32'b0;\n        endcase\n    end\n\nendmodule\n```",
+  "model": "gpt-5.4-2026-03-05",
+  "provider": "tamu",
+  "raw": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "annotations": [],
+          "content": "```systemverilog\nmodule extend (\n    input  logic [31:7] InstrD,\n    input  logic [2:0]  ImmSrcD,\n    output logic [31:0] ImmExtD\n);\n\n    always_comb begin\n        case (ImmSrcD)\n            3'b000: ImmExtD = {{20{InstrD[31]}}, InstrD[31:20]};                            // I-type\n            3'b001: ImmExtD = {{20{InstrD[31]}}, InstrD[31:25], InstrD[11:7]};              // S-type\n            3'b010: ImmExtD = {{20{InstrD[31]}}, InstrD[7], InstrD[30:25], InstrD[11:8], 1'b0}; // B-type\n            3'b011: ImmExtD = {{12{InstrD[31]}}, InstrD[19:12], InstrD[20], InstrD[30:21], 1'b0}; // J-type\n            3'b100: ImmExtD = {InstrD[31:12], 12'b0};                                        // U-type\n            default: ImmExtD = 32'b0;\n        endcase\n    end\n\nendmodule\n```",
+          "role": "assistant"
+        },
+        "provider_specific_fields": {}
+      }
+    ],
+    "created": 1788922063,
+    "id": "chatcmpl-EM2dbM1TwATECIndbROOF00iFcCU7",
+    "model": "gpt-5.4-2026-03-05",
+    "object": "chat.completion",
+    "prompt_filter_results": [
+      {
+        "content_filter_results": {},
+        "prompt_index": 0
+      }
+    ],
+    "routing": {
+      "serving_pipereplica": "d20260817145135-d9f505e1-default-r1-dp0-default"
+    },
+    "service_tier": "default",
+    "usage": {
+      "completion_tokens": 278,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": 0
+      },
+      "latency_checkpoint": {
+        "engine_tbt_ms": 7,
+        "engine_ttft_ms": 94,
+        "engine_ttlt_ms": 2126,
+        "pre_inference_ms": 151,
+        "service_tbt_ms": 7,
+        "service_ttft_ms": 502,
+        "service_ttlt_ms": 2530,
+        "user_visible_ttft_ms": 351
+      },
+      "prompt_tokens": 948,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      },
+      "total_tokens": 1226
+    }
+  },
+  "settings": {
+    "max_output_tokens": 8192
+  },
+  "usage": {
+    "completion_tokens": 278,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": 0
+    },
+    "latency_checkpoint": {
+      "engine_tbt_ms": 7,
+      "engine_ttft_ms": 94,
+      "engine_ttlt_ms": 2126,
+      "pre_inference_ms": 151,
+      "service_tbt_ms": 7,
+      "service_ttft_ms": 502,
+      "service_ttlt_ms": 2530,
+      "user_visible_ttft_ms": 351
+    },
+    "prompt_tokens": 948,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cached_tokens": 0
+    },
+    "total_tokens": 1226
+  }
+}

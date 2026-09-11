@@ -1,0 +1,8 @@
+{
+  "compile_log": "",
+  "compiled": false,
+  "counts_valid": false,
+  "guardrail": "Exactly one module named controller_tb is required.",
+  "output": "",
+  "success": false
+}

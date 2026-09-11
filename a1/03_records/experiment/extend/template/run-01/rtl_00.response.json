@@ -1,0 +1,88 @@
+{
+  "content": "```systemverilog\nmodule extend (\n    input  logic [31:7] InstrD,\n    input  logic [2:0]  ImmSrcD,\n    output logic [31:0] ImmExtD\n);\n\n    logic [31:0] imm_i;\n    logic [31:0] imm_s;\n    logic [31:0] imm_b;\n    logic [31:0] imm_j;\n    logic [31:0] imm_u;\n\n    always_comb begin\n        imm_i = {{20{InstrD[31]}}, InstrD[31:20]};\n        imm_s = {{20{InstrD[31]}}, InstrD[31:25], InstrD[11:7]};\n        imm_b = {{20{InstrD[31]}}, InstrD[7], InstrD[30:25], InstrD[11:8], 1'b0};\n        imm_j = {{12{InstrD[31]}}, InstrD[19:12], InstrD[20], InstrD[30:21], 1'b0};\n        imm_u = {InstrD[31:12], 12'b0};\n\n        ImmExtD = 32'b0;\n        case (ImmSrcD)\n            3'b000: ImmExtD = imm_i;\n            3'b001: ImmExtD = imm_s;\n            3'b010: ImmExtD = imm_b;\n            3'b011: ImmExtD = imm_j;\n            3'b100: ImmExtD = imm_u;\n            3'b101: ImmExtD = 32'b0;\n            3'b110: ImmExtD = 32'b0;\n            3'b111: ImmExtD = 32'b0;\n            default: ImmExtD = 32'b0;\n        endcase\n    end\n\nendmodule\n```",
+  "model": "gpt-5.4-2026-03-05",
+  "provider": "tamu",
+  "raw": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "annotations": [],
+          "content": "```systemverilog\nmodule extend (\n    input  logic [31:7] InstrD,\n    input  logic [2:0]  ImmSrcD,\n    output logic [31:0] ImmExtD\n);\n\n    logic [31:0] imm_i;\n    logic [31:0] imm_s;\n    logic [31:0] imm_b;\n    logic [31:0] imm_j;\n    logic [31:0] imm_u;\n\n    always_comb begin\n        imm_i = {{20{InstrD[31]}}, InstrD[31:20]};\n        imm_s = {{20{InstrD[31]}}, InstrD[31:25], InstrD[11:7]};\n        imm_b = {{20{InstrD[31]}}, InstrD[7], InstrD[30:25], InstrD[11:8], 1'b0};\n        imm_j = {{12{InstrD[31]}}, InstrD[19:12], InstrD[20], InstrD[30:21], 1'b0};\n        imm_u = {InstrD[31:12], 12'b0};\n\n        ImmExtD = 32'b0;\n        case (ImmSrcD)\n            3'b000: ImmExtD = imm_i;\n            3'b001: ImmExtD = imm_s;\n            3'b010: ImmExtD = imm_b;\n            3'b011: ImmExtD = imm_j;\n            3'b100: ImmExtD = imm_u;\n            3'b101: ImmExtD = 32'b0;\n            3'b110: ImmExtD = 32'b0;\n            3'b111: ImmExtD = 32'b0;\n            default: ImmExtD = 32'b0;\n        endcase\n    end\n\nendmodule\n```",
+          "role": "assistant"
+        },
+        "provider_specific_fields": {
+          "content_filter_results": {}
+        }
+      }
+    ],
+    "created": 1788922094,
+    "id": "chatcmpl-EM2e6sSkAnfTCaLxQJw8drn6zyDlY",
+    "model": "gpt-5.4-2026-03-05",
+    "object": "chat.completion",
+    "prompt_filter_results": [
+      {
+        "content_filter_results": {},
+        "prompt_index": 0
+      }
+    ],
+    "routing": {
+      "serving_pipereplica": "d20260817141218-99696777-default-r0-dp0-default"
+    },
+    "service_tier": "default",
+    "usage": {
+      "completion_tokens": 393,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": 0
+      },
+      "latency_checkpoint": {
+        "engine_tbt_ms": 8,
+        "engine_ttft_ms": 137,
+        "engine_ttlt_ms": 3086,
+        "pre_inference_ms": 151,
+        "service_tbt_ms": 7,
+        "service_ttft_ms": 519,
+        "service_ttlt_ms": 3461,
+        "user_visible_ttft_ms": 368
+      },
+      "prompt_tokens": 995,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      },
+      "total_tokens": 1388
+    }
+  },
+  "settings": {
+    "max_output_tokens": 8192
+  },
+  "usage": {
+    "completion_tokens": 393,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": 0
+    },
+    "latency_checkpoint": {
+      "engine_tbt_ms": 8,
+      "engine_ttft_ms": 137,
+      "engine_ttlt_ms": 3086,
+      "pre_inference_ms": 151,
+      "service_tbt_ms": 7,
+      "service_ttft_ms": 519,
+      "service_ttlt_ms": 3461,
+      "user_visible_ttft_ms": 368
+    },
+    "prompt_tokens": 995,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cached_tokens": 0
+    },
+    "total_tokens": 1388
+  }
+}

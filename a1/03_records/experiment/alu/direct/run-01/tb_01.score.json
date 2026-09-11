@@ -1,0 +1,11 @@
+{
+  "compile_log": "/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-8ii6n3te/rtl.sv:23: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'B[31:0]').\n/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-8ii6n3te/rtl.sv:44: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'B[31:0]').\n/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-8ii6n3te/rtl.sv:46: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'B[31:0]').",
+  "compiled": true,
+  "counts_valid": true,
+  "failed": 0,
+  "output": "A1_CHECKS passed=492 failed=0 total=492\nPASS\n/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-8ii6n3te/tb.sv:259: $finish called at 249000 (1ps)",
+  "passed": 492,
+  "process_ok": true,
+  "success": true,
+  "total": 492
+}

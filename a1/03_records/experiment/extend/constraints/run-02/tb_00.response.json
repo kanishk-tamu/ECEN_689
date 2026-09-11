@@ -1,0 +1,86 @@
+{
+  "content": "```systemverilog\n`timescale 1ns/1ps\n\nmodule extend_tb;\n\n  // DUT interface\n  logic [31:7] InstrD;\n  logic [2:0]  ImmSrcD;\n  logic [31:0] ImmExtD;\n\n  // Scoreboard counters\n  integer passed;\n  integer failed;\n  integer total;\n  integer fail_prints;\n\n  // DUT instantiation using named ports\n  extend dut (\n    .InstrD (InstrD),\n    .ImmSrcD(ImmSrcD),\n    .ImmExtD(ImmExtD)\n  );\n\n  // Watchdog to prevent hangs\n  initial begin\n    #10000;\n    $display(\"FAIL\");\n    $finish;\n  end\n\n  // Expected-value function derived only from the specification.\n  function automatic logic [31:0] exp_imm(\n    input logic [31:7] instr,\n    input logic [2:0]  src\n  );\n    begin\n      case (src)\n        3'b000: exp_imm = {{20{instr[31]}}, instr[31:20]};                            // I-type\n        3'b001: exp_imm = {{20{instr[31]}}, instr[31:25], instr[11:7]};              // S-type\n        3'b010: exp_imm = {{20{instr[31]}}, instr[7], instr[30:25], instr[11:8], 1'b0}; // B-type\n        3'b011: exp_imm = {{12{instr[31]}}, instr[19:12], instr[20], instr[30:21], 1'b0}; // J-type\n        3'b100: exp_imm = {instr[31:12], 12'b0};                                      // U-type\n        default: exp_imm = 32'hxxxxxxxx; // unused encodings unspecified; not checked\n      endcase\n    end\n  endfunction\n\n  // Helpers to build fragmented instruction fields for directed cases.\n  function automatic logic [31:7] make_i(input logic [11:0] imm);\n    logic [31:7] t;\n    begin\n      t = '0;\n      t[31:20] = imm;\n      make_i = t;\n    end\n  endfunction\n\n  function automatic logic [31:7] make_s(input logic [11:0] imm);\n    logic [31:7] t;\n    begin\n      t = '0;\n      t[31:25] = imm[11:5];\n      t[11:7]  = imm[4:0];\n      make_s = t;\n    end\n  endfunction\n\n  function automatic logic [31:7] make_b(input logic signed [12:0] imm);\n    logic [31:7] t;\n    begin\n      t = '0;\n      t[31]    = imm[12];\n      t[7]     = imm[11];\n      t[30:25] = imm[10:5];\n      t[11:8]  = imm[4:1];\n      make_b = t;\n    end\n  endfunction\n\n  function automatic logic [31:7] make_j(input logic signed [20:0] imm);\n    logic [31:7] t;\n    begin\n      t = '0;\n      t[31]    = imm[20];\n      t[19:12] = imm[19:12];\n      t[20]    = imm[11];\n      t[30:21] = imm[10:1];\n      make_j = t;\n    end\n  endfunction\n\n  function automatic logic [31:7] make_u(input logic [19:0] imm);\n    logic [31:7] t;\n    begin\n      t = '0;\n      t[31:12] = imm;\n      make_u = t;\n    end\n  endfunction\n\n  task automatic check_case(\n    input string       label,\n    input logic [31:7] instr,\n    input logic [2:0]  src\n  );\n    logic [31:0] expected;\n    begin\n      InstrD  = instr;\n      ImmSrcD = src;\n      #1; // allow combinational settling\n\n      expected = exp_imm(instr, src);\n\n      // Only defined behavior is checked; illegal ImmSrcD values are intentionally skipped.\n      if (src <= 3'b100) begin\n        total = total + 1;\n        if (ImmExtD === expected) begin\n          passed = passed + 1;\n        end else begin\n          failed = failed + 1;\n          if (fail_prints < 8) begin\n            $display(\"FAIL label=%s InstrD=0x%07h ImmSrcD=0x%0h actual=0x%08h expected=0x%08h\",\n                     label, instr, src, ImmExtD, expected);\n            fail_prints = fail_prints + 1;\n          end\n        end\n      end\n    end\n  endtask\n\n  integer i;\n  integer seed;\n  logic [31:0] rnd;\n\n  initial begin\n    passed = 0;\n    failed = 0;\n    total = 0;\n    fail_prints = 0;\n    seed = 32'h6890A1E1;\n\n    InstrD = '0;\n    ImmSrcD = '0;\n    #1;\n\n    // Coverage intent:\n    // - Every defined ImmSrcD format: I/S/B/J/U\n    // - Specification sample examples\n    // - Zero, positive, negative, all ones, sign boundaries\n    // - Fragmented immediate reconstruction for S/B/J\n    // - Alignment bit insertion for B/J (bit 0 forced zero)\n    // - Random deterministic vectors for broader field coverage\n    // - Illegal encodings 101/110/111 are out of scope and not checked\n\n    // I-type sample and corners\n    check_case(\"I_sample_minus1\", make_i(12'hFFF), 3'b000);   // sample -1\n    check_case(\"I_zero\",          make_i(12'h000), 3'b000);\n    check_case(\"I_plus1\",         make_i(12'h001), 3'b000);\n    check_case(\"I_maxpos\",        make_i(12'h7FF), 3'b000);\n    check_case(\"I_minneg\",        make_i(12'h800), 3'b000);\n    check_case(\"I_allones\",       make_i(12'hFFF), 3'b000);\n    check_case(\"I_pattern\",       make_i(12'hA5A), 3'b000);\n\n    // S-type corners\n    check_case(\"S_zero\",          make_s(12'h000), 3'b001);\n    check_case(\"S_plus1\",         make_s(12'h001), 3'b001);\n    check_case(\"S_maxpos\",        make_s(12'h7FF), 3'b001);\n    check_case(\"S_minneg\",        make_s(12'h800), 3'b001);\n    check_case(\"S_allones\",       make_s(12'hFFF), 3'b001);\n    check_case(\"S_fragmented\",    make_s(12'h35A), 3'b001);\n\n    // B-type sample examples and boundaries; all legal values have imm[0]=0\n    check_case(\"B_sample_plus8\",  make_b(13'sd8),   3'b010);  // sample +8\n    check_case(\"B_sample_minus4\", make_b(-13'sd4),  3'b010);  // sample -4\n    check_case(\"B_zero\",          make_b(13'sd0),   3'b010);\n    check_case(\"B_plus2\",         make_b(13'sd2),   3'b010);\n    check_case(\"B_maxpos\",        make_b(13'sd4094),3'b010);\n    check_case(\"B_minneg\",        make_b(-13'sd4096),3'b010);\n    check_case(\"B_minus2\",        make_b(-13'sd2),  3'b010);\n    check_case(\"B_fragmented\",    make_b(13'sd2730),3'b010);  // even, exercises split fields\n\n    // J-type corners and fragmented reconstruction; legal values have imm[0]=0\n    check_case(\"J_zero\",          make_j(21'sd0),        3'b011);\n    check_case(\"J_plus2\",         make_j(21'sd2),        3'b011);\n    check_case(\"J_maxpos\",        make_j(21'sd1048574),  3'b011);\n    check_case(\"J_minneg\",        make_j(-21'sd1048576), 3'b011);\n    check_case(\"J_minus2\",        make_j(-21'sd2),       3'b011);\n    check_case(\"J_fragmented\",    make_j(21'sd349526),   3'b011);\n\n    // U-type sample and corners\n    check_case(\"U_sample\",        make_u(20'hABCDE), 3'b100); // sample\n    check_case(\"U_zero\",          make_u(20'h00000), 3'b100);\n    check_case(\"U_onehot\",        make_u(20'h00001), 3'b100);\n    check_case(\"U_maxposish\",     make_u(20'h7FFFF), 3'b100);\n    check_case(\"U_signbit\",       make_u(20'h80000), 3'b100);\n    check_case(\"U_allones\",       make_u(20'hFFFFF), 3'b100);\n    check_case(\"U_pattern\",       make_u(20'h54321), 3'b100);\n\n    // Deterministic pseudo-random directed coverage across all defined classes.\n    for (i = 0; i < 20; i = i + 1) begin\n      rnd = $random(seed);\n      check_case(\"I_rand\", make_i(rnd[11:0]), 3'b000);\n\n      rnd = $random(seed);\n      check_case(\"S_rand\", make_s(rnd[11:0]), 3'b001);\n\n      rnd = $random(seed);\n      rnd[0] = 1'b0; // enforce legal alignment for branch immediate values\n      check_case(\"B_rand\", make_b(rnd[12:0]), 3'b010);\n\n      rnd = $random(seed);\n      rnd[0] = 1'b0; // enforce legal alignment for jump immediate values\n      check_case(\"J_rand\", make_j(rnd[20:0]), 3'b011);\n\n      rnd = $random(seed);\n      check_case(\"U_rand\", make_u(rnd[19:0]), 3'b100);\n    end\n\n    $display(\"A1_CHECKS passed=%0d failed=%0d total=%0d\", passed, failed, total);\n    if ((failed == 0) && (total > 0))\n      $display(\"PASS\");\n    else\n      $display(\"FAIL\");\n    $finish;\n  end\n\nendmodule\n```",
+  "model": "gpt-5.4-2026-03-05",
+  "provider": "tamu",
+  "raw": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "annotations": [],
+          "content": "```systemverilog\n`timescale 1ns/1ps\n\nmodule extend_tb;\n\n  // DUT interface\n  logic [31:7] InstrD;\n  logic [2:0]  ImmSrcD;\n  logic [31:0] ImmExtD;\n\n  // Scoreboard counters\n  integer passed;\n  integer failed;\n  integer total;\n  integer fail_prints;\n\n  // DUT instantiation using named ports\n  extend dut (\n    .InstrD (InstrD),\n    .ImmSrcD(ImmSrcD),\n    .ImmExtD(ImmExtD)\n  );\n\n  // Watchdog to prevent hangs\n  initial begin\n    #10000;\n    $display(\"FAIL\");\n    $finish;\n  end\n\n  // Expected-value function derived only from the specification.\n  function automatic logic [31:0] exp_imm(\n    input logic [31:7] instr,\n    input logic [2:0]  src\n  );\n    begin\n      case (src)\n        3'b000: exp_imm = {{20{instr[31]}}, instr[31:20]};                            // I-type\n        3'b001: exp_imm = {{20{instr[31]}}, instr[31:25], instr[11:7]};              // S-type\n        3'b010: exp_imm = {{20{instr[31]}}, instr[7], instr[30:25], instr[11:8], 1'b0}; // B-type\n        3'b011: exp_imm = {{12{instr[31]}}, instr[19:12], instr[20], instr[30:21], 1'b0}; // J-type\n        3'b100: exp_imm = {instr[31:12], 12'b0};                                      // U-type\n        default: exp_imm = 32'hxxxxxxxx; // unused encodings unspecified; not checked\n      endcase\n    end\n  endfunction\n\n  // Helpers to build fragmented instruction fields for directed cases.\n  function automatic logic [31:7] make_i(input logic [11:0] imm);\n    logic [31:7] t;\n    begin\n      t = '0;\n      t[31:20] = imm;\n      make_i = t;\n    end\n  endfunction\n\n  function automatic logic [31:7] make_s(input logic [11:0] imm);\n    logic [31:7] t;\n    begin\n      t = '0;\n      t[31:25] = imm[11:5];\n      t[11:7]  = imm[4:0];\n      make_s = t;\n    end\n  endfunction\n\n  function automatic logic [31:7] make_b(input logic signed [12:0] imm);\n    logic [31:7] t;\n    begin\n      t = '0;\n      t[31]    = imm[12];\n      t[7]     = imm[11];\n      t[30:25] = imm[10:5];\n      t[11:8]  = imm[4:1];\n      make_b = t;\n    end\n  endfunction\n\n  function automatic logic [31:7] make_j(input logic signed [20:0] imm);\n    logic [31:7] t;\n    begin\n      t = '0;\n      t[31]    = imm[20];\n      t[19:12] = imm[19:12];\n      t[20]    = imm[11];\n      t[30:21] = imm[10:1];\n      make_j = t;\n    end\n  endfunction\n\n  function automatic logic [31:7] make_u(input logic [19:0] imm);\n    logic [31:7] t;\n    begin\n      t = '0;\n      t[31:12] = imm;\n      make_u = t;\n    end\n  endfunction\n\n  task automatic check_case(\n    input string       label,\n    input logic [31:7] instr,\n    input logic [2:0]  src\n  );\n    logic [31:0] expected;\n    begin\n      InstrD  = instr;\n      ImmSrcD = src;\n      #1; // allow combinational settling\n\n      expected = exp_imm(instr, src);\n\n      // Only defined behavior is checked; illegal ImmSrcD values are intentionally skipped.\n      if (src <= 3'b100) begin\n        total = total + 1;\n        if (ImmExtD === expected) begin\n          passed = passed + 1;\n        end else begin\n          failed = failed + 1;\n          if (fail_prints < 8) begin\n            $display(\"FAIL label=%s InstrD=0x%07h ImmSrcD=0x%0h actual=0x%08h expected=0x%08h\",\n                     label, instr, src, ImmExtD, expected);\n            fail_prints = fail_prints + 1;\n          end\n        end\n      end\n    end\n  endtask\n\n  integer i;\n  integer seed;\n  logic [31:0] rnd;\n\n  initial begin\n    passed = 0;\n    failed = 0;\n    total = 0;\n    fail_prints = 0;\n    seed = 32'h6890A1E1;\n\n    InstrD = '0;\n    ImmSrcD = '0;\n    #1;\n\n    // Coverage intent:\n    // - Every defined ImmSrcD format: I/S/B/J/U\n    // - Specification sample examples\n    // - Zero, positive, negative, all ones, sign boundaries\n    // - Fragmented immediate reconstruction for S/B/J\n    // - Alignment bit insertion for B/J (bit 0 forced zero)\n    // - Random deterministic vectors for broader field coverage\n    // - Illegal encodings 101/110/111 are out of scope and not checked\n\n    // I-type sample and corners\n    check_case(\"I_sample_minus1\", make_i(12'hFFF), 3'b000);   // sample -1\n    check_case(\"I_zero\",          make_i(12'h000), 3'b000);\n    check_case(\"I_plus1\",         make_i(12'h001), 3'b000);\n    check_case(\"I_maxpos\",        make_i(12'h7FF), 3'b000);\n    check_case(\"I_minneg\",        make_i(12'h800), 3'b000);\n    check_case(\"I_allones\",       make_i(12'hFFF), 3'b000);\n    check_case(\"I_pattern\",       make_i(12'hA5A), 3'b000);\n\n    // S-type corners\n    check_case(\"S_zero\",          make_s(12'h000), 3'b001);\n    check_case(\"S_plus1\",         make_s(12'h001), 3'b001);\n    check_case(\"S_maxpos\",        make_s(12'h7FF), 3'b001);\n    check_case(\"S_minneg\",        make_s(12'h800), 3'b001);\n    check_case(\"S_allones\",       make_s(12'hFFF), 3'b001);\n    check_case(\"S_fragmented\",    make_s(12'h35A), 3'b001);\n\n    // B-type sample examples and boundaries; all legal values have imm[0]=0\n    check_case(\"B_sample_plus8\",  make_b(13'sd8),   3'b010);  // sample +8\n    check_case(\"B_sample_minus4\", make_b(-13'sd4),  3'b010);  // sample -4\n    check_case(\"B_zero\",          make_b(13'sd0),   3'b010);\n    check_case(\"B_plus2\",         make_b(13'sd2),   3'b010);\n    check_case(\"B_maxpos\",        make_b(13'sd4094),3'b010);\n    check_case(\"B_minneg\",        make_b(-13'sd4096),3'b010);\n    check_case(\"B_minus2\",        make_b(-13'sd2),  3'b010);\n    check_case(\"B_fragmented\",    make_b(13'sd2730),3'b010);  // even, exercises split fields\n\n    // J-type corners and fragmented reconstruction; legal values have imm[0]=0\n    check_case(\"J_zero\",          make_j(21'sd0),        3'b011);\n    check_case(\"J_plus2\",         make_j(21'sd2),        3'b011);\n    check_case(\"J_maxpos\",        make_j(21'sd1048574),  3'b011);\n    check_case(\"J_minneg\",        make_j(-21'sd1048576), 3'b011);\n    check_case(\"J_minus2\",        make_j(-21'sd2),       3'b011);\n    check_case(\"J_fragmented\",    make_j(21'sd349526),   3'b011);\n\n    // U-type sample and corners\n    check_case(\"U_sample\",        make_u(20'hABCDE), 3'b100); // sample\n    check_case(\"U_zero\",          make_u(20'h00000), 3'b100);\n    check_case(\"U_onehot\",        make_u(20'h00001), 3'b100);\n    check_case(\"U_maxposish\",     make_u(20'h7FFFF), 3'b100);\n    check_case(\"U_signbit\",       make_u(20'h80000), 3'b100);\n    check_case(\"U_allones\",       make_u(20'hFFFFF), 3'b100);\n    check_case(\"U_pattern\",       make_u(20'h54321), 3'b100);\n\n    // Deterministic pseudo-random directed coverage across all defined classes.\n    for (i = 0; i < 20; i = i + 1) begin\n      rnd = $random(seed);\n      check_case(\"I_rand\", make_i(rnd[11:0]), 3'b000);\n\n      rnd = $random(seed);\n      check_case(\"S_rand\", make_s(rnd[11:0]), 3'b001);\n\n      rnd = $random(seed);\n      rnd[0] = 1'b0; // enforce legal alignment for branch immediate values\n      check_case(\"B_rand\", make_b(rnd[12:0]), 3'b010);\n\n      rnd = $random(seed);\n      rnd[0] = 1'b0; // enforce legal alignment for jump immediate values\n      check_case(\"J_rand\", make_j(rnd[20:0]), 3'b011);\n\n      rnd = $random(seed);\n      check_case(\"U_rand\", make_u(rnd[19:0]), 3'b100);\n    end\n\n    $display(\"A1_CHECKS passed=%0d failed=%0d total=%0d\", passed, failed, total);\n    if ((failed == 0) && (total > 0))\n      $display(\"PASS\");\n    else\n      $display(\"FAIL\");\n    $finish;\n  end\n\nendmodule\n```",
+          "role": "assistant"
+        },
+        "provider_specific_fields": {}
+      }
+    ],
+    "created": 1788922066,
+    "id": "chatcmpl-EM2deXofBnUC4RRVapei46mXONyJH",
+    "model": "gpt-5.4-2026-03-05",
+    "object": "chat.completion",
+    "prompt_filter_results": [
+      {
+        "content_filter_results": {},
+        "prompt_index": 0
+      }
+    ],
+    "routing": {
+      "serving_pipereplica": "d20260817145135-d9f505e1-default-r2-dp0-default"
+    },
+    "service_tier": "default",
+    "usage": {
+      "completion_tokens": 2390,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "audio_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": 0
+      },
+      "latency_checkpoint": {
+        "engine_tbt_ms": 9,
+        "engine_ttft_ms": 99,
+        "engine_ttlt_ms": 21749,
+        "pre_inference_ms": 128,
+        "service_tbt_ms": 9,
+        "service_ttft_ms": 456,
+        "service_ttlt_ms": 22097,
+        "user_visible_ttft_ms": 328
+      },
+      "prompt_tokens": 1522,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cached_tokens": 0
+      },
+      "total_tokens": 3912
+    }
+  },
+  "settings": {
+    "max_output_tokens": 8192
+  },
+  "usage": {
+    "completion_tokens": 2390,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": 0
+    },
+    "latency_checkpoint": {
+      "engine_tbt_ms": 9,
+      "engine_ttft_ms": 99,
+      "engine_ttlt_ms": 21749,
+      "pre_inference_ms": 128,
+      "service_tbt_ms": 9,
+      "service_ttft_ms": 456,
+      "service_ttlt_ms": 22097,
+      "user_visible_ttft_ms": 328
+    },
+    "prompt_tokens": 1522,
+    "prompt_tokens_details": {
+      "audio_tokens": 0,
+      "cached_tokens": 0
+    },
+    "total_tokens": 3912
+  }
+}

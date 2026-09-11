@@ -1,0 +1,11 @@
+{
+  "compile_log": "/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-ak3l5azl/rtl.sv:23: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'B[31:0]').\n/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-ak3l5azl/rtl.sv:44: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'B[31:0]').\n/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-ak3l5azl/rtl.sv:46: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'B[31:0]').",
+  "compiled": true,
+  "counts_valid": true,
+  "failed": 37,
+  "output": "FAIL SAMPLE_SRA_RES A=80000000 B=00000001 ALUSelect=101 SubArith=1 actual=c0000000 expected=40000000\nFAIL SRA_SWEEP_RES A=ffffffff B=ffffffff ALUSelect=101 SubArith=1 actual=ffffffff expected=00000001\nFAIL SRA_SWEEP_RES A=aaaaaaaa B=0000001f ALUSelect=101 SubArith=1 actual=ffffffff expected=00000001\nFAIL SRA_SWEEP_RES A=80000001 B=0000001e ALUSelect=101 SubArith=1 actual=fffffffe expected=00000002\nFAIL SRA_NEG_31_RES A=80000001 B=0000001f ALUSelect=101 SubArith=1 actual=ffffffff expected=00000001\nFAIL SRA_FRAG4_RES A=f0000000 B=12345664 ALUSelect=101 SubArith=1 actual=ff000000 expected=0f000000\nFAIL SRA_SHAMT_ALL_RES A=80000001 B=00000001 ALUSelect=101 SubArith=1 actual=c0000000 expected=40000000\nFAIL SRA_SHAMT_ALL_RES A=80000001 B=00000002 ALUSelect=101 SubArith=1 actual=e0000000 expected=20000000\nA1_CHECKS passed=455 failed=37 total=492\nFAIL\n/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-ak3l5azl/tb.sv:251: $finish called at 249000 (1ps)",
+  "passed": 455,
+  "process_ok": true,
+  "success": false,
+  "total": 492
+}

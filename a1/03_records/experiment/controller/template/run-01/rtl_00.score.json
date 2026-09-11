@@ -1,0 +1,8 @@
+{
+  "compile_log": "/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-cm_o6bl0/rtl.sv:253: error: Cannot perform procedural assignment to variable 'rd' because it is also continuously assigned.\n/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-cm_o6bl0/rtl.sv:254: error: Cannot perform procedural assignment to variable 'rs1' because it is also continuously assigned.\n/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-cm_o6bl0/rtl.sv:255: error: Cannot perform procedural assignment to variable 'rs2' because it is also continuously assigned.\n3 error(s) during elaboration.",
+  "compiled": false,
+  "counts_valid": false,
+  "output": "",
+  "process_ok": false,
+  "success": false
+}

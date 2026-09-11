@@ -1,0 +1,6 @@
+Using spec: specs/extend.yaml
+Top module: extend
+Model: gpt-5.4
+Suggested output directory: /Users/kanishk/Documents/MSEC/TAMU/Fall26/LLMs for AGNTC HW DSGN/A1/A1_assignment_only/results/experiment/extend/constraints/run-01
+Initial RTL: 40/40 samples
+extend: passed; artifacts: /Users/kanishk/Documents/MSEC/TAMU/Fall26/LLMs for AGNTC HW DSGN/A1/A1_assignment_only/results/experiment/extend/constraints/run-01

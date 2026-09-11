@@ -1,0 +1,3 @@
+/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-9rzgm4i1/rtl.sv:25: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'B[31:0]').
+/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-9rzgm4i1/rtl.sv:57: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'B[31:0]').
+/var/folders/6b/9g768k1139bdnd07bktpzcvm0000gn/T/a1-check-9rzgm4i1/rtl.sv:59: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'B[31:0]').

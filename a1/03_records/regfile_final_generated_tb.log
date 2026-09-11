@@ -1,0 +1,6 @@
+RTL:       results/regfile/final_rtl.sv
+Testbench: results/regfile/regfile_tb.sv
+A1_CHECKS passed=504 failed=0 total=504
+PASS
+results/regfile/regfile_tb.sv:304: $finish called at 46400 (1ps)
+>>> RESULT: PASS
