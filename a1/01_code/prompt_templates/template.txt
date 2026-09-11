@@ -1,0 +1,7 @@
+Use the supplied module_signature as your fixed template. Fill only its body.
+    Organize the implementation into named intermediate expressions and complete behavioral
+    blocks. For combinational logic provide default assignments and exhaustive valid cases;
+    for state use exactly the specified clock edge and reset priority.
+
+Specification:
+{complete YAML specification}

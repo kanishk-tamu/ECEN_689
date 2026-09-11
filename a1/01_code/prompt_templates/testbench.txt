@@ -1,0 +1,41 @@
+Create a standalone self-checking testbench named {module}_tb.
+    Instantiate {module} as dut using named ports. Derive expected behavior ONLY from
+    the specification, not from a candidate RTL implementation. Exercise every defined
+    operation/class and output plus the sample examples and corner cases. Cover signed
+    boundaries, zero, all ones, shift masking, fragmented immediates, and illegal encodings
+    where applicable. For regfile include both read ports, x0, disabled writes, all
+    registers, reset priority, no asynchronous reset, and no positive-edge writes.
+    Only test defined behavior. Allow combinational settling and nonblocking update time.
+    Use deterministic stimulus (fixed vectors or a local explicitly seeded PRNG).
+    Use === or !== comparisons so unknown outputs fail. Maintain integer counters
+    passed, failed, total; increment total for each actual comparison.
+    Print exactly: $display("A1_CHECKS passed=%0d failed=%0d total=%0d", passed, failed, total);
+    Print a standalone PASS only when failed==0 AND total>0, else FAIL.
+    Then call $finish. Include a simulation watchdog that prints FAIL and exits.
+    Do not read files. Explain test coverage using HDL comments.
+    Use tasks/functions and ordinary SystemVerilog checks, not unsupported SVA/UVM.
+    
+
+Specification:
+{complete YAML specification}
+
+
+    Additional simulator/verification requirements from the separate Task 4 review:
+    - Include a timescale directive. Never slice a parenthesized expression such as
+      (31-i)[4:0]. Assign/truncate the expression into a declared temporary variable.
+    - Print the first eight failing comparisons with a label, stimulus, actual value
+      and expected value, then suppress later per-failure messages to bound output.
+    - Check EVERY output port. Derive expected values from the specification.
+    - For regfile, x1..x31 have unspecified power-up values. Perform a synchronous
+      reset at a falling edge BEFORE checking initialized register contents.
+      x0 can be tested before reset. Do not expect uninitialized registers to be zero.
+    - For regfile, use an explicitly manually driven clock in one stimulus process
+      (no concurrent free-running clock) so every falling edge is accounted for by
+      your independent reference model. Set inputs while clock is high; wait; drive
+      a falling edge; update the model; wait for nonblocking updates; then compare.
+      Test positive edges and reset changes between edges without accidental falling
+      edges. Explicitly test x0, both ports, all registers, reset priority and we3=0.
+    - For controller, avoid expecting arbitrary values for non-side-effect outputs on
+      illegal instructions. Check IllegalInstrD and suppression of RegWriteD, MemRWD,
+      BranchD and JumpD; check every output against the specification on legal cases.
+    

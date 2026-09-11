@@ -1,0 +1,9 @@
+Implement the specification with explicit defaults and complete assignments.
+    Check widths, wraparound, signed versus unsigned comparison and shifts, bit ordering,
+    clock edge, reset priority and illegal-instruction side-effect suppression as applicable.
+    For controller initialize every output to zero and set legal controls only after
+    validating the full encoding; illegal cases must restore every control to zero.
+    Avoid latches and unintended state. Keep unspecified behavior outside the test contract.
+
+Specification:
+{complete YAML specification}
